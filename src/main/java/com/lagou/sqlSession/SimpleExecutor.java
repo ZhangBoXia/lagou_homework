@@ -87,10 +87,10 @@ public class SimpleExecutor implements  Executor {
 
     @Override
     public int update(Configuration configuration, MappedStatement mappedStatement, Object paramter) throws Exception {
-        // 1. 注册驱动，获取连接
+        // 1. 注册驱动，获取连接   不明原因导致 使用连接池会报错 所以现在用了 原始方法
 //        Connection connection = configuration.getDataSource().getConnection();
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///mybatis?useUnicode=true&characterEncoding=utf8","root","zhang519");
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///mybatis?useUnicode=true&characterEncoding=utf8","root","root");
 
         String sql = mappedStatement.getSql();
         BoundSql boundSql = getBoundSql(sql);
